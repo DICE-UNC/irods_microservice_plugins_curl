@@ -79,6 +79,7 @@ public:
 
     irods::error post( char*, keyValPair_t*, char** );
 
+    irods::error encode_str(char *strToEncode, char **buffer );
 
     // Callback progress function for the curl handler
     static int progress( void*, double, double, double, double );

@@ -126,12 +126,36 @@ irods::error irodsCurl::get_str( char *url, char **buffer ) {
 	// Some error logging
 	if ( res != CURLE_OK ) {
 		rodsLog( LOG_ERROR, "irodsCurl::get_str: cURL error: %s", curl_easy_strerror( res ) );
+		return CODE(-1);
 	}
 
 	// Output
 	*buffer = string.ptr;
 
 	return CODE(res);
+}
+
+
+irods::error irodsCurl::encode_str (char *strToEncode, char **buffer) {
+	CURLcode res = CURLE_OK;
+	string_t string;
+	int status;
+
+
+	// Set up easy handler
+	curl_easy_setopt( curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
+
+	 char *output = curl_easy_escape(curl, strToEncode, 0);
+	 if(output) {
+	    printf("Encoded: %sn", output);
+	    *buffer = strdup(output);
+	    curl_free(output);
+	  } else {
+		  rodsLog( LOG_ERROR, "irodsCurl::encode_str: cURL error: null response indicates url encoding failed");
+	  }
+
+
+	 return CODE(0);
 }
 
 
