@@ -1,4 +1,4 @@
-* libmsiCurlEncodeStr.cpp
+/* libmsiCurlEncodeString.cpp
  *
  *  Created on: May 20, 2014
  *      Author: Mike Conway -DICE
@@ -13,7 +13,7 @@
 // =-=-=-=-=-=-=-
 // New microservice plugin definition style
 MICROSERVICE_BEGIN(
-	msiCurlUrlEncodeStr,
+	msiCurlUrlEncodeString,
     STR, strToEncode, INPUT,
     STR, encodedStr, OUTPUT PTR NO_ALLOC )
 
